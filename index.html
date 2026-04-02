@@ -52,7 +52,6 @@
             min-height: 100vh;
         }
 
-        /* --- ZMODYFIKOWANY HEADER (Extreme Liquid Glass) --- */
         header {
             background-color: rgba(104, 0, 153, 0.05); 
             color: var(--md-sys-color-primary); 
@@ -332,7 +331,10 @@
         .btn-delete:hover { background-color: var(--md-sys-color-error-container); }
 
         .project-info-container, .prompt-modal-container {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
+            position: fixed; 
+            top: 10%;
+            left: 50%; 
+            transform: translateX(-50%) scale(0.9);
             background: rgba(255, 255, 255, 0.03); 
             backdrop-filter: blur(25px) saturate(180%);
             -webkit-backdrop-filter: blur(25px) saturate(180%);
@@ -350,8 +352,12 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .project-info-container.show, .prompt-modal-container.show { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
-        
+        .project-info-container.show, .prompt-modal-container.show { 
+            opacity: 1; 
+            visibility: visible; 
+            transform: translateX(-50%) scale(1);
+        }
+		
         .modal-header { padding: 24px 24px 0 24px; display: flex; justify-content: space-between; align-items: center; }
         .modal-content { padding: 24px; }
         
