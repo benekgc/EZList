@@ -294,6 +294,17 @@
             flex-grow: 1;
             padding: 10px;
         }
+		
+		.btn-edit-text {
+            background: none !important;
+            box-shadow: none !important;
+            color: var(--md-sys-color-error);
+            font-size: 0.8rem;
+            padding: 0;
+            margin-left: 8px;
+            opacity: 0.7;
+        }
+        .btn-edit-text:hover { opacity: 1; transform: none; }
 
         .list-actions { display: flex; gap: 8px; }
 
@@ -494,7 +505,6 @@
             promptCallback = null;
         }
 
-        // NOWE FUNKCJE DLA POTWIERDZANIA
         function customConfirm(title, message, callback) {
             document.getElementById('confirmTitle').innerText = title;
             document.getElementById('confirmMessage').innerText = message;
@@ -569,7 +579,23 @@
             const listHeader = document.createElement("div");
             listHeader.classList.add("list-header");
             const listTitle = document.createElement("h3");
-            listTitle.textContent = name;
+			
+			const titleSpan = document.createElement("span");
+			titleSpan.classList.add("list-name-text");
+            titleSpan.textContent = name;
+            listTitle.appendChild(titleSpan);
+
+            const editBtn = document.createElement("button");
+            editBtn.classList.add("btn-edit-text");
+            editBtn.textContent = "edit";
+            editBtn.onclick = function() {
+                customPrompt('Rename List', 'Enter new name...', (newName) => {
+                    titleSpan.textContent = newName;
+                    saveLists();
+                });
+            };
+            listTitle.appendChild(editBtn);
+            
             const actionsDiv = document.createElement("div");
             actionsDiv.classList.add("list-actions");
             
@@ -577,7 +603,7 @@
             addItemBtn.classList.add("btn-tonal");
             addItemBtn.textContent = "+ Add";
             addItemBtn.addEventListener("click", function () {
-                customPrompt('Add New Item', 'What do you need to buy?', (itemText) => {
+                customPrompt('Add New Item', '...', (itemText) => {
                     const newItem = createListItem(itemText, false);
                     listContainer.querySelector("ul").appendChild(newItem);
                     saveLists();
@@ -588,7 +614,6 @@
             deleteListBtn.classList.add("btn-error");
             deleteListBtn.textContent = "Delete";
             deleteListBtn.addEventListener("click", function () {
-                // TUTAJ UŻYWAMY NASZEGO NOWEGO MODALA
                 customConfirm('Delete List', 'Are you sure you want to delete this list?', () => {
                     listContainer.classList.add("anim-exit");
                     setTimeout(() => {
@@ -641,23 +666,26 @@
         }
 
         function saveLists() {
-            const lists = document.querySelectorAll(".list-container");
-            let data = [];
-            lists.forEach(list => {
-                if (list.classList.contains("anim-exit")) return;
-                let listName = list.querySelector("h3").innerText;
-                let items = [];
-                list.querySelectorAll("li").forEach(item => {
-                    if (item.classList.contains("anim-exit")) return;
-                    items.push({
-                        text: item.querySelector("span").innerText,
-                        checked: item.classList.contains("checked")
-                    });
+        const lists = document.querySelectorAll(".list-container");
+        let data = [];
+        lists.forEach(list => {
+            if (list.classList.contains("anim-exit")) return;
+            
+            const nameElement = list.querySelector("h3 .list-name-text");
+            let listName = nameElement ? nameElement.innerText : "Untitled List";
+            
+            let items = [];
+            list.querySelectorAll("li").forEach(item => {
+                if (item.classList.contains("anim-exit")) return;
+                items.push({
+                    text: item.querySelector("span").innerText,
+                    checked: item.classList.contains("checked")
                 });
-                data.push({ name: listName, items: items });
             });
-            localStorage.setItem("savedLists", JSON.stringify(data));
-        }
+            data.push({ name: listName, items: items });
+        });
+        localStorage.setItem("savedLists", JSON.stringify(data));
+    }
 
         function loadLists() {
             const savedData = localStorage.getItem("savedLists");
