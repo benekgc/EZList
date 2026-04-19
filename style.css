@@ -3,7 +3,7 @@
             --md-sys-color-on-primary: #ffffff;
             --md-sys-color-primary-container: #F1E0FF;
             --md-sys-color-on-primary-container: #23003B;
-            --md-sys-color-background: #FFFBFF;
+            --md-sys-color-background: #EFEFEF;
             --md-sys-color-on-background: #1C1B1E;
             --md-sys-color-surface: #FDF8FD;
             --md-sys-color-surface-variant: #f8f5fa;
@@ -83,12 +83,12 @@
             gap: 8px;
             box-sizing: border-box;
             box-shadow: 
-                rgba(0, 0, 0, 0.15) 0px -2px 5px 0px inset, 
-                rgba(0, 0, 0, 0.05) 0px -5px 10px 0px inset, 
-                rgba(0, 0, 0, 0.05) 0px 1px 1px, 
-                rgba(0, 0, 0, 0.10) 0px 2px 2px, 
-                rgba(0, 0, 0, 0.10) 0px 4px 4px, 
-                rgba(0, 0, 0, 0.08) 0px 8px 8px;
+                rgba(0, 0, 0, 0.06) 0px -2px 5px 0px inset, 
+                rgba(0, 0, 0, 0.03) 0px -5px 10px 0px inset, 
+                rgba(0, 0, 0, 0.04) 0px 1px 1px, 
+                rgba(0, 0, 0, 0.05) 0px 2px 2px, 
+                rgba(0, 0, 0, 0.05) 0px 4px 4px, 
+                rgba(0, 0, 0, 0.05) 0px 8px 8px;
         }
 
         button:active { transform: scale(0.95); }
@@ -254,13 +254,7 @@
             padding: 24px;
             margin-bottom: 24px;
             transition: var(--transition-standard);
-            box-shadow: 
-                rgba(0, 0, 0, 0.12) 0px -2px 5px 0px inset, 
-                rgba(0, 0, 0, 0.07) 0px -5px 10px 0px inset, 
-                rgba(0, 0, 0, 0.08) 0px 1px 1px, 
-                rgba(0, 0, 0, 0.11) 0px 2px 2px, 
-                rgba(0, 0, 0, 0.11) 0px 4px 4px, 
-                rgba(0, 0, 0, 0.11) 0px 8px 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
         .list-header {
@@ -304,17 +298,11 @@
             background-color: var(--md-sys-color-surface-variant);
             border-radius: 32px;
             transition: var(--transition-standard);
-            box-shadow: 
-                rgba(0, 0, 0, 0.09) 0px -2px 5px 0px inset, 
-                rgba(0, 0, 0, 0.04) 0px -5px 10px 0px inset, 
-                rgba(0, 0, 0, 0.05) 0px 1px 1px, 
-                rgba(0, 0, 0, 0.08) 0px 2px 2px, 
-                rgba(0, 0, 0, 0.08) 0px 4px 4px, 
-                rgba(0, 0, 0, 0.08) 0px 8px 8px;
+			box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.08);
         }
 
         li span { flex-grow: 1; margin-right: 12px; font-size: 1.05rem; transition: var(--transition-standard); }
-        li.checked { opacity: 0.6; }
+        li.checked { opacity: 0.6; box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.15); }
         li.checked span { text-decoration: line-through; }
 
         .item-actions { display: flex; gap: 8px; }
